@@ -34,7 +34,6 @@ Vue.directive('draggable', {
             let item = el.getElementsByClassName(no_draggable[i]);
             for (let i = 0; i < item.length; i++) {
                 item[i].addEventListener('mousedown',function(){draggable=false});
-                item[i].addEventListener('mouseover',function(){draggable=true});
                 item[i].addEventListener('mouseout',function(){draggable=true});
             }
         }
