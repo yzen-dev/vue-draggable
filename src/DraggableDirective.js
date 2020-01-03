@@ -1,9 +1,7 @@
-import Vue from 'vue'
-Vue.directive('draggable', {
-    bind: function (el,binding) {
+export default {
+    bind(el) {
         el.style.position = 'absolute';
         let startX, startY, initialMouseX, initialMouseY;
-        let draggable = true;
 
         function mousemove(e) {
             let dx = e.clientX - initialMouseX;
@@ -17,8 +15,19 @@ Vue.directive('draggable', {
             document.removeEventListener('mousemove', mousemove);
             document.removeEventListener('mouseup', mouseup);
         }
+
         function mousedown(e) {
-            if (!draggable) return;
+            if (e.target.tagName=== 'INPUT' || e.target.tagName === 'SELECT')
+                return;
+
+            let curElement = e.target;
+            while (curElement != null) {
+                if (curElement.classList.contains('no-draggable')) {
+                    return;
+                }
+                curElement = curElement.parentElement;
+            }
+
             startX = el.offsetLeft;
             startY = el.offsetTop;
             initialMouseX = e.clientX;
@@ -27,15 +36,7 @@ Vue.directive('draggable', {
             document.addEventListener('mouseup', mouseup);
             return false;
         }
-        el.addEventListener('mousedown', mousedown);
 
-        let no_draggable = binding.value.no_draggable;
-        for (let i = 0; i < no_draggable.length; i++) {
-            let item = el.getElementsByClassName(no_draggable[i]);
-            for (let i = 0; i < item.length; i++) {
-                item[i].addEventListener('mousedown',function(){draggable=false});
-                item[i].addEventListener('mouseout',function(){draggable=true});
-            }
-        }
+        el.addEventListener('mousedown', mousedown);
     }
-});
+}

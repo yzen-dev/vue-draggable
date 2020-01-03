@@ -1,16 +1,23 @@
-# vue-draggable
+# **vue-draggable-element**
 
-Vue2 directive for draggable elements.
+## **Vue directive for draggable elements.**
 
-Mount:
+## **Установка**
+### **npm**
+```
+$ npm i vue-graggable-element
+```
 
-import './index.js';
+## Usage:
+```
+import 'vue-draggable-element';
+..
 
-Usage:
-<div v-draggable="{ no_draggable: ['images','description'] }">
+<div v-draggable="{no_draggable: ['images','description']}">
 	...
 </div>
+```
 
-no_draggable - list of classes to disable draggable
+**no_draggable** - list of classes to disable draggable
 
-![](http://ipic.su/img/img7/fs/vue-draggable.1516502799.gif)
+![Example](http://ipic.su/img/img7/fs/vue-draggable.1516502799.gif)
